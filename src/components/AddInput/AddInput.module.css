@@ -1,0 +1,53 @@
+.AddInput textarea {
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 3px;
+    box-shadow: #b4b4b4 0px 8px 8px;
+    outline: none;
+    font-size: 1.15rem;
+    width: 40em;
+    /* transition: 500ms ease-in; */
+} 
+
+.AddInput {
+    /* text-align: center; */
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    /* grid-template-columns: auto auto; */
+}
+
+.AddInput button {
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 3px;
+    outline: none;
+    width: 5em;
+    font-size: 1.15rem;
+    background-color: #48b6ff;
+    color: white;
+    margin-left: 1rem;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.Flex {
+    display: flex;
+
+}
+
+.AddInput button:hover {
+    background-color: #a748ff;
+}
+
+@media (max-width: 500px) {
+    .AddInput textarea {
+        width: 20em;
+    }
+}
+@media (max-width: 400px) {
+    .AddInput textarea {
+        width: 15em;
+    }
+}
