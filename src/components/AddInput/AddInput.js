@@ -10,10 +10,11 @@ class AddInput extends Component {
             {
             id: 0,
             date: '08-04-2019',
-            log: 'this is a dummy text'
+            log: 'this is a dummy text',
+            isEditing: false
             },
         ],
-        isEditing: false
+        
     }
 
 
@@ -39,22 +40,33 @@ class AddInput extends Component {
         this.setState({addCardlog: logs})
     }
 
+    
+    //Toggle isEditing
+    isEditingToggleHandler = (index) => {
+       const logs = [...this.state.addCardlog]
+       logs[index].isEditing = !this.state.addCardlog[index].isEditing;
+       this.setState({addCardlog: logs})
+    }
+
     //Edit the Log
-    editLogHandler = (index) => {
-       this.setState({inputValue: this.state.addCardlog[index].log })
+    editLogHandler = (index, editedText) => {
+       this.isEditingToggleHandler(index)
+       
+       const logs = [...this.state.addCardlog]
+       logs[index].log = editedText.value
+       this.setState({addCardlog: logs})
+          console.log(editedText.value);
+    }
 
-
-
-        }
 
     render () {
-
         let detailCard = (
             this.state.addCardlog.map((el, index) => {
                return <DetailCard 
-                        editing={this.state.isEditing}
+                        editing={this.state.addCardlog[index].isEditing}
                         delete={this.deleteLogHandler}
-                        edit={this.editLogHandler}
+                        toggleedit={this.isEditingToggleHandler}
+                        conformedit={this.editLogHandler}
                         logdetails={el.log}
                         index={index}
                         date={el.date}
