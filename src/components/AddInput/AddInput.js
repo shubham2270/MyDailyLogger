@@ -22,7 +22,14 @@ class AddInput extends Component {
         this.setState({inputValue: e.target.value})
     }
 
-    //Create New Log
+    //Add log on press of enter key
+    addLogOnEnter = (event) => {
+        if(event.keyCode === 13) {
+            this.addLogOnClick()
+        }
+    }
+
+    //Create New Log on click
     addLogOnClick = (index) => {
         this.setState(prevState => ({
             addCardlog: [...prevState.addCardlog, 
@@ -30,6 +37,7 @@ class AddInput extends Component {
                           date: '08-04-2019', 
                           log: prevState.inputValue}]
         }))
+        this.setState({inputValue: ''})
 
     }
 
@@ -41,17 +49,17 @@ class AddInput extends Component {
     }
 
     
-    //Toggle isEditing
+    //Toggle 'isEditing'
     isEditingToggleHandler = (index) => {
        const logs = [...this.state.addCardlog]
        logs[index].isEditing = !this.state.addCardlog[index].isEditing;
        this.setState({addCardlog: logs})
     }
 
-    //Edit the Log
+    //Edits the Log
     editLogHandler = (index, editedText) => {
        this.isEditingToggleHandler(index)
-       
+
        const logs = [...this.state.addCardlog]
        logs[index].log = editedText.value
        this.setState({addCardlog: logs})
@@ -79,6 +87,7 @@ class AddInput extends Component {
                 <div className={styles.AddInput}>
                    <div className={styles.Flex}>
                         <textarea
+                        onKeyUp={this.addLogOnEnter}
                             onChange={this.updatelogAsWeType}
                             type="text" 
                             placeholder='Add Details'

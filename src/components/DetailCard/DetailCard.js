@@ -17,7 +17,13 @@ class DetailCard extends Component {
    
 
     if (this.props.editing) {
-       logValue = <input type="text" ref={(value) => {this.editedValue = value}} defaultValue={this.props.logdetails}></input>
+       logValue = <textarea 
+                        className={styles.textarea}
+                        type="text" 
+                        ref={(value) => {this.editedValue = value}} 
+                        cols='70'
+                        rows='5'
+                        defaultValue={this.props.logdetails}></textarea>
        editIcon = (<div style={{color:'#29d150'}} //Sets the conform-edit tick icon
                   onClick={() => this.props.conformedit(this.props.index, this.editedValue)}><i className="fas fa-check"></i>
                 </div>
@@ -30,7 +36,7 @@ class DetailCard extends Component {
         <div className={styles.card}>
             <div className={styles.date}>{this.props.date}</div>
            <div className={styles.desc}>
-            {logValue} 
+           {logValue}
            </div>
            <div className={styles.editWrap}>
                {editIcon}
