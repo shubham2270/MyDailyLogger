@@ -5,14 +5,15 @@ import DetailCard from '../DetailCard/DetailCard';
 
 class AddInput extends Component {
     state = {
-        inputValue: null,
+        inputValue: '',
         addCardlog: [
             {
             id: 0,
             date: '08-04-2019',
-            log: null
+            log: 'this is a dummy text'
             },
-        ]
+        ],
+        isEditing: false
     }
 
 
@@ -20,37 +21,44 @@ class AddInput extends Component {
         this.setState({inputValue: e.target.value})
     }
 
-    addLogOnClick = () => {
+    //Create New Log
+    addLogOnClick = (index) => {
         this.setState(prevState => ({
             addCardlog: [...prevState.addCardlog, 
-                        {id: prevState.addCardlog.map(el => console.log(el)), 
-                            date: '08-04-2019', log: prevState.inputValue}]
+                        { id: index,
+                          date: '08-04-2019', 
+                          log: prevState.inputValue}]
         }))
 
     }
 
-    deleteLogHandler = (event) => {
-        // const logIndex = this.state.addCardlog.findIndex(log => {
-        //     console.log(log === 1)
-
-        // })
-
+    //Deletes the Log
+    deleteLogHandler = (index) => {
         const logs = [...this.state.addCardlog];
-        const updatedLogs = logs.splice(2, 1)
-        console.log(updatedLogs)
+        logs.splice(index, 1)
         this.setState({addCardlog: logs})
-        // return updatedLogs
     }
-      
+
+    //Edit the Log
+    editLogHandler = (index) => {
+       this.setState({inputValue: this.state.addCardlog[index].log })
+
+
+
+        }
+
     render () {
 
         let detailCard = (
-            this.state.addCardlog.map((el, i) => {
+            this.state.addCardlog.map((el, index) => {
                return <DetailCard 
+                        editing={this.state.isEditing}
                         delete={this.deleteLogHandler}
+                        edit={this.editLogHandler}
                         logdetails={el.log}
+                        index={index}
                         date={el.date}
-                        key={i}/>
+                        key={index}/>
             })
         )
 
@@ -61,7 +69,8 @@ class AddInput extends Component {
                         <textarea
                             onChange={this.updatelogAsWeType}
                             type="text" 
-                            placeholder='Add Details' 
+                            placeholder='Add Details'
+                            value={this.state.inputValue}
                             />
                         <button type='button' onClick={this.addLogOnClick}>Add</button>
                    </div>

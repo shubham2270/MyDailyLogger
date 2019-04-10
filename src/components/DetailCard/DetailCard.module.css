@@ -53,7 +53,7 @@ code {
 @media (max-width: 500px) {
     .card {
         max-width: 96%;
-        min-width: auto;
+        min-width: 20em;
         display: grid;
         grid-template-columns: 1fr;
         align-items: center;
